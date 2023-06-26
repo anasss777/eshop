@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import { ContextProvider } from "@/context/stateContext";
 import "./globals.css";
 
 export const metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ContextProvider>{children}</ContextProvider>
+      </body>
     </html>
   );
 }

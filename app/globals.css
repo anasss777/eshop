@@ -6,6 +6,11 @@
 
 @layer components {
     .submenu {
-      @apply py-3 pl-3 border border-y-2 hover:scale-[1.01] lg:w-1/6 lg:text-center lg:border-y-0 lg:items-center lg:py-[1px];
+      @apply bg-blue-200 w-full shadow-md text-center py-1 hover:bg-blue-400 hover:scale-[1.01] duration-300 transition-all
+      ease-linear md:hidden
+    }
+    .logo {
+      @apply font-fancy font-bold text-3xl py-1 px-3 cursor-pointer bg-gradient-to-r from-purple-400 via-blue-700
+      to-blue-500 bg-clip-text text-transparent float-left
     }
   }

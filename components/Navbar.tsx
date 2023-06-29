@@ -1,40 +1,50 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import NavbarContent from "./NavbarContent";
+import { Category } from "@/types/Category";
+import { getCategories } from "@/sanity/sanity-utils";
 
 const Navbar = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCategories = await getCategories();
+      setCategories(fetchedCategories);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="hidden md:flex md:flex-row">
-      <NavbarContent
-        name="Smart Phones"
-        brand1="Samsung Phones"
-        brand2="iPhone"
-        brand3="Xiaomi Phones"
-      />
-      <NavbarContent name="Laptops" brand1="Mac" brand2="HP" brand3="Lenovo" />
-      <NavbarContent
-        name="Gaming Accessories"
-        brand1="Keyboard"
-        brand2="Monitor"
-        brand3="Mouse"
-      />
-      <NavbarContent
-        name="Tablets"
-        brand1="iPad"
-        brand2="Samsung Tables"
-        brand3="Xiaomi Tablets"
-      />
-      <NavbarContent
-        name="Phones Accessories"
-        brand1="Earphone"
-        brand2="Charger"
-        brand3="Power Bank"
-      />
-      <NavbarContent
-        name="Smart Watches"
-        brand1="Samsung Watches"
-        brand2="iPhone watches"
-        brand3="Huawei Watches"
-      />
+      {categories
+        .sort(
+          (a, b) =>
+            new Date(a._createdAt).getTime() - new Date(b._createdAt).getTime()
+        )
+        .map((category) => (
+          <NavbarContent
+            key={category._id}
+            name={category.name}
+            subcategory1={
+              category.subcategory
+                ? category.subcategory[0]?.name
+                : "***********"
+            }
+            subcategory2={
+              category.subcategory
+                ? category.subcategory[1]?.name
+                : "***********"
+            }
+            subcategory3={
+              category.subcategory
+                ? category.subcategory[2]?.name
+                : "***********"
+            }
+          />
+        ))}
     </div>
   );
 };

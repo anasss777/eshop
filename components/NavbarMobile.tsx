@@ -2,10 +2,23 @@
 
 import { TheContext } from "@/context/stateContext";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NavbarContentMobile from "./NavbarContentMobile";
+import { Category } from "@/types/Category";
+import { getCategories } from "@/sanity/sanity-utils";
 
 const NavbarMobile = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCategories = await getCategories();
+      setCategories(fetchedCategories);
+    };
+
+    fetchData();
+  }, []);
+
   const context = useContext(TheContext);
 
   if (!context) {
@@ -34,42 +47,33 @@ const NavbarMobile = () => {
 
       {isOpen && (
         <div className="flex flex-col w-56 md:hidden">
-          <NavbarContentMobile
-            name="Smart Phones"
-            brand1="Samsung Phones"
-            brand2="iPhone"
-            brand3="Xiaomi Phones"
-          />
-          <NavbarContentMobile
-            name="Laptops"
-            brand1="Mac"
-            brand2="HP"
-            brand3="Lenovo"
-          />
-          <NavbarContentMobile
-            name="Gaming Accessories"
-            brand1="Keyboard"
-            brand2="Monitor"
-            brand3="Mouse"
-          />
-          <NavbarContentMobile
-            name="Tablets"
-            brand1="iPad"
-            brand2="Samsung Tables"
-            brand3="Xiaomi Tablets"
-          />
-          <NavbarContentMobile
-            name="Phones Accessories"
-            brand1="Earphone"
-            brand2="Charger"
-            brand3="Power Bank"
-          />
-          <NavbarContentMobile
-            name="Smart Watches"
-            brand1="Samsung Watches"
-            brand2="iPhone watches"
-            brand3="Huawei Watches"
-          />
+          {categories
+            .sort(
+              (a, b) =>
+                new Date(a._createdAt).getTime() -
+                new Date(b._createdAt).getTime()
+            )
+            .map((category) => (
+              <NavbarContentMobile
+                key={category._id}
+                name={category.name}
+                subcategory1={
+                  category.subcategory
+                    ? category.subcategory[0]?.name
+                    : "***********"
+                }
+                subcategory2={
+                  category.subcategory
+                    ? category.subcategory[1]?.name
+                    : "***********"
+                }
+                subcategory3={
+                  category.subcategory
+                    ? category.subcategory[2]?.name
+                    : "***********"
+                }
+              />
+            ))}
         </div>
       )}
     </div>

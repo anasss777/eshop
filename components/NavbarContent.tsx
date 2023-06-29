@@ -2,9 +2,9 @@ import React from "react";
 
 type Props = {
   name: string;
-  brand1: string;
-  brand2: string;
-  brand3: string;
+  subcategory1: string;
+  subcategory2: string;
+  subcategory3: string;
 };
 
 const NavbarContent = (props: Props) => {
@@ -16,9 +16,15 @@ const NavbarContent = (props: Props) => {
       <button className="bg-blue-300 w-full h-8 hover:bg-blue-400 hover:scale-[1.01] duration-300 transition-all ease-linear">
         {props.name}
       </button>
-      <button className="submenu group-hover:block">{props.brand1}</button>
-      <button className="submenu group-hover:block">{props.brand2}</button>
-      <button className="submenu group-hover:block">{props.brand3}</button>
+      <button className="submenu group-hover:block">
+        {props.subcategory1}
+      </button>
+      <button className="submenu group-hover:block">
+        {props.subcategory2}
+      </button>
+      <button className="submenu group-hover:block">
+        {props.subcategory3}
+      </button>
     </div>
   );
 };

@@ -5,12 +5,12 @@ import React, { useState } from "react";
 
 type Props = {
   name: string;
-  brand1: string;
-  brand2: string;
-  brand3: string;
+  subcategory1: string;
+  subcategory2: string;
+  subcategory3: string;
 };
 
-const NavbarContent = (props: Props) => {
+const NavbarContentMobile = (props: Props) => {
   const [showSubmenu, setShowSubmenu] = useState(false);
   return (
     <div className="text-white font-montserrat z-10 cursor-pointer shadow-lightShadowing text-center">
@@ -27,28 +27,28 @@ const NavbarContent = (props: Props) => {
         />
       </button>
 
-      {/* Brand 1 Name */}
+      {/* subcategory 1 Name */}
       <button
         className="submenu"
         style={{ display: showSubmenu ? "block" : "none" }}
       >
-        {props.brand1}
+        {props.subcategory1}
       </button>
 
-      {/* Brand 2 Name */}
+      {/* subcategory 2 Name */}
       <button
         className="submenu"
         style={{ display: showSubmenu ? "block" : "none" }}
       >
-        {props.brand2}
+        {props.subcategory2}
       </button>
 
-      {/* Brand 3 Name */}
+      {/* subcategory 3 Name */}
       <button
         className="submenu"
         style={{ display: showSubmenu ? "block" : "none" }}
       >
-        {props.brand3}
+        {props.subcategory3}
       </button>
 
       {/* Show Category Button */}
@@ -62,4 +62,4 @@ const NavbarContent = (props: Props) => {
   );
 };
 
-export default NavbarContent;
+export default NavbarContentMobile;

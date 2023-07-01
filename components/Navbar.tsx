@@ -28,20 +28,8 @@ const Navbar = () => {
           <NavbarContent
             key={category._id}
             name={category.name}
-            subcategory1={
-              category.subcategory
-                ? category.subcategory[0]?.name
-                : "***********"
-            }
-            subcategory2={
-              category.subcategory
-                ? category.subcategory[1]?.name
-                : "***********"
-            }
-            subcategory3={
-              category.subcategory
-                ? category.subcategory[2]?.name
-                : "***********"
+            subcategoriesNames={
+              category.subcategory.map((item) => item.name) || "**********"
             }
           />
         ))}

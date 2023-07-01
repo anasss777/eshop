@@ -28,7 +28,7 @@ const NavbarMobile = () => {
   const { isOpen, setIsOpen } = context;
 
   return (
-    <div>
+    <div className="flex flex-col relative">
       {/* Search bar on mobile */}
       <div className="bg-blue-200 w-full h-12 flex justify-center items-center md:hidden">
         <Image
@@ -57,20 +57,8 @@ const NavbarMobile = () => {
               <NavbarContentMobile
                 key={category._id}
                 name={category.name}
-                subcategory1={
-                  category.subcategory
-                    ? category.subcategory[0]?.name
-                    : "***********"
-                }
-                subcategory2={
-                  category.subcategory
-                    ? category.subcategory[1]?.name
-                    : "***********"
-                }
-                subcategory3={
-                  category.subcategory
-                    ? category.subcategory[2]?.name
-                    : "***********"
+                subcategoriesNames={
+                  category.subcategory.map((item) => item.name) || "**********"
                 }
               />
             ))}

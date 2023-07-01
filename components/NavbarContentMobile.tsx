@@ -5,9 +5,7 @@ import React, { useState } from "react";
 
 type Props = {
   name: string;
-  subcategory1: string;
-  subcategory2: string;
-  subcategory3: string;
+  subcategoriesNames: string[];
 };
 
 const NavbarContentMobile = (props: Props) => {
@@ -27,37 +25,16 @@ const NavbarContentMobile = (props: Props) => {
         />
       </button>
 
-      {/* subcategory 1 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.subcategory1}
-      </button>
-
-      {/* subcategory 2 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.subcategory2}
-      </button>
-
-      {/* subcategory 3 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.subcategory3}
-      </button>
-
-      {/* Show Category Button */}
-      {/* <button
-        className="text-black"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        Show {props.name}
-      </button> */}
+      {/* subcategories Names */}
+      {props.subcategoriesNames.map((name, index) => (
+        <button
+          key={index}
+          className="submenu"
+          style={{ display: showSubmenu ? "block" : "none" }}
+        >
+          {name}
+        </button>
+      ))}
     </div>
   );
 };

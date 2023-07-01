@@ -1,16 +1,11 @@
-import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
-import NavbarMobile from "@/components/NavbarMobile";
+"use client";
+
+import MainProduct from "@/components/MainProduct";
 
 export default function Home() {
   return (
     <div>
-      {/* Header */}
-      <Header />
-
-      {/* Navbar */}
-      <NavbarMobile />
-      <Navbar />
+      <MainProduct />
     </div>
   );
 }

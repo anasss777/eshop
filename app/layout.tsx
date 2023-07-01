@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import { ContextProvider } from "@/context/stateContext";
 import "./globals.css";
+import Header from "@/components/Header";
+import NavbarMobile from "@/components/NavbarMobile";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "E-Shop",
@@ -22,7 +25,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ContextProvider>{children}</ContextProvider>
+        <ContextProvider>
+          {/* Header */}
+          <Header />
+
+          {/* Navbar */}
+          <NavbarMobile />
+          <Navbar />
+          {children}
+        </ContextProvider>
       </body>
     </html>
   );

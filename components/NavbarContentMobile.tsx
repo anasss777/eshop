@@ -5,12 +5,10 @@ import React, { useState } from "react";
 
 type Props = {
   name: string;
-  brand1: string;
-  brand2: string;
-  brand3: string;
+  subcategoriesNames: string[];
 };
 
-const NavbarContent = (props: Props) => {
+const NavbarContentMobile = (props: Props) => {
   const [showSubmenu, setShowSubmenu] = useState(false);
   return (
     <div className="text-white font-montserrat z-10 cursor-pointer shadow-lightShadowing text-center">
@@ -27,39 +25,18 @@ const NavbarContent = (props: Props) => {
         />
       </button>
 
-      {/* Brand 1 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.brand1}
-      </button>
-
-      {/* Brand 2 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.brand2}
-      </button>
-
-      {/* Brand 3 Name */}
-      <button
-        className="submenu"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        {props.brand3}
-      </button>
-
-      {/* Show Category Button */}
-      {/* <button
-        className="text-black"
-        style={{ display: showSubmenu ? "block" : "none" }}
-      >
-        Show {props.name}
-      </button> */}
+      {/* subcategories Names */}
+      {props.subcategoriesNames.map((name, index) => (
+        <button
+          key={index}
+          className="submenu"
+          style={{ display: showSubmenu ? "block" : "none" }}
+        >
+          {name}
+        </button>
+      ))}
     </div>
   );
 };
 
-export default NavbarContent;
+export default NavbarContentMobile;

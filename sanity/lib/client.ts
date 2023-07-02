@@ -10,11 +10,10 @@ export const client = createClient({
 })
 
 const clientConfig = {
-  projectId: "17aybt7u",
-  dataset: "production",
-  apiVersion: "2023-06-28",
+  projectId: projectId,
+  dataset: dataset,
+  apiVersion: apiVersion,
   useCdn: true,
-  token: process.env.SANITY_EDITOR_TOKEN
 }
 
 export default clientConfig;

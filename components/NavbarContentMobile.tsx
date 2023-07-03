@@ -16,10 +16,13 @@ const NavbarContentMobile = (props: Props) => {
   return (
     <div className="text-white font-montserrat z-10 cursor-pointer shadow-lightShadowing text-center">
       {/* Category section */}
-      <button className="bg-blue-300 w-full h-8 text-left pl-3 hover:bg-blue-400 hover:scale-[1.01] duration-300 transition-all ease-linear">
+      <button
+        className="bg-blue-300 w-full h-fit inline text-left pl-3 pt-1 hover:bg-blue-400 hover:scale-[1.01] duration-300 transition-all
+      ease-linear"
+      >
         {/* Category name */}
         <Link href={props.categorySlug}>
-          <p className="pt-1">{props.name}</p>
+          <p className="inline">{props.name}</p>
         </Link>
 
         {/* Dropdown button */}
@@ -28,7 +31,7 @@ const NavbarContentMobile = (props: Props) => {
           alt="Show submenu button"
           height={30}
           width={30}
-          className="invert relative -top-7 mr-1 float-right"
+          className="invert inline float-right"
           onClick={() => setShowSubmenu(!showSubmenu)}
         />
       </button>

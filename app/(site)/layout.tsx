@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import { ContextProvider } from "@/context/stateContext";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
-import NavbarMobile from "@/components/NavbarMobile";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
@@ -30,7 +29,6 @@ export default function RootLayout({
           <Header />
 
           {/* Navbar */}
-          <NavbarMobile />
           <Navbar />
           {children}
         </ContextProvider>

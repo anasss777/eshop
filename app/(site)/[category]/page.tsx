@@ -1,5 +1,6 @@
 "use client";
 
+import ElementCard from "@/components/ElementCard";
 import { getSubcategories } from "@/sanity/sanity-utils";
 import { Subcategory } from "@/types/Subcategory";
 import React, { useEffect, useState } from "react";
@@ -27,7 +28,18 @@ const Category = ({ params }: Props) => {
     fetchData();
   }, [slug, subcategories]);
 
-  return <div>{filterdSubcategory.map((item) => item.name)}</div>;
+  return (
+    <div className="flex flex-row justify-center">
+      {filterdSubcategory.map((item) => (
+        <ElementCard
+          key={item._id}
+          name={item.name}
+          ImgSrc={item.image}
+          slug={`${item.category.slug}/${item.slug}`}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Category;

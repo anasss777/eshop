@@ -1,5 +1,6 @@
 "use client";
 
+import ElementCard from "@/components/ElementCard";
 import { getProducts } from "@/sanity/sanity-utils";
 import { Product } from "@/types/Product";
 import React, { useEffect, useState } from "react";
@@ -25,7 +26,18 @@ const Subcategory = ({ params }: Props) => {
     fetchData();
   }, [products, slug]);
 
-  return <div>{filterdProducts.map((item) => item.name)}</div>;
+  return (
+    <div className="flex flex-row justify-center">
+      {filterdProducts.map((item) => (
+        <ElementCard
+          key={item._id}
+          name={item.name}
+          ImgSrc={item.image[0]}
+          slug={`${item.subcategory.slug}/${item.slug}`}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Subcategory;

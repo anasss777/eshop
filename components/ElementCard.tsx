@@ -10,11 +10,11 @@ type Props = {
 
 const ElementCard = (props: Props) => {
   return (
-    <div className="relative top-10 w-fit">
+    <div className="relative top-10 w-fit py-10 md:py-0">
       <Link href={props.slug}>
         <button
-          className="relative border-2 border-solid border-blue-400 w-96 h-64 rounded-xl p-1 mx-4 group hover:scale-[1.03] duration-300
-    ease-linear transition-all"
+          className="relative border-2 border-solid border-blue-400 w-[360px] md:w-96 h-64 rounded-xl p-1 mx-4 group hover:scale-[1.03]
+          duration-300 ease-linear transition-all"
         >
           <Image
             className="rounded-xl w-[374px] h-[245px] group-hover:blur-[3px] object-scale-down"
@@ -29,7 +29,7 @@ const ElementCard = (props: Props) => {
             </p>
           </div>
         </button>
-        <p className="relative top-5 left-5 font-montserrat text-[27px]">
+        <p className="relative top-5 left-5 font-montserrat text-[27px] text-gray-600">
           <span className="font-mcLaren text-blue-400">|</span>
           {props.name}
         </p>

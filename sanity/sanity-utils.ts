@@ -28,6 +28,24 @@ export async function getProducts(): Promise<Product[]> {
   )
 }
 
+export async function getCategory(slug:string): Promise<Category> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "category" && slug.current == $slug][0]{
+      _id,
+      _createdAt,
+      name,
+      "slug": slug.current,
+      "image": image.asset->url,
+      subcategory[]->{
+        name,
+        "slug": slug.current,
+        'image': image.asset->url,
+      }
+    }`,
+    {slug}
+  )
+}
+
 export async function getCategories(): Promise<Category[]> {
     return createClient(clientConfig).fetch(
       groq`*[_type == "category"]{

@@ -13,4 +13,13 @@
       @apply font-fancy font-bold text-3xl py-1 px-3 cursor-pointer bg-gradient-to-r from-purple-400 via-blue-700
       to-blue-500 bg-clip-text text-transparent float-left
     }
+    .footerImg {
+      @apply invert flex mx-auto;
+    }
+    .footerText {
+      @apply relative flex justify-center font-montserrat text-lg text-white h-10;
+    }
+    .footerSocial {
+      @apply invert hover:shadow-shadowing transition-all duration-300 rounded-full
+    }
   }

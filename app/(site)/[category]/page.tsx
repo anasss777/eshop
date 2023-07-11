@@ -33,14 +33,11 @@ const Category = ({ params }: Props) => {
   }, [slug, subcategories]);
 
   return (
-    <div className="flex flex-col">
-      <p className="pt-10 md:flex justify-center text-4xl font-montserrat text-gray-600 hidden">
+    <div className="flex flex-col px-10">
+      <p className="pt-10 md:flex justify-center text-center text-4xl font-montserrat text-gray-600">
         {categoty?.name}
       </p>
-      <div className="flex md:flex-row flex-col justify-center">
-        <p className="pt-10 flex justify-center text-4xl font-montserrat md:hidden">
-          {categoty?.name}
-        </p>
+      <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 flex-col justify-center items-center">
         {filterdSubcategory.map((item) => (
           <ElementCard
             key={item._id}

@@ -27,20 +27,17 @@ const Subcategory = ({ params }: Props) => {
   }, [products, slug]);
 
   return (
-    <div className="flex flex-col">
-      <p className="pt-10 md:flex justify-center text-4xl font-montserrat text-gray-600 hidden">
-        {filterdProducts[0]?.subcategory.name}
+    <div className="flex flex-col px-10">
+      <p className="pt-10 md:flex justify-center text-center text-4xl font-montserrat text-gray-600">
+        {filterdProducts[0]?.name}
       </p>
-      <div className="flex md:flex-row flex-col justify-center">
-        <p className="pt-10 flex justify-center text-4xl font-montserrat md:hidden">
-          {filterdProducts[0]?.subcategory.name}
-        </p>
+      <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 flex-col justify-center items-center">
         {filterdProducts.map((item) => (
           <ElementCard
             key={item._id}
             name={item.name}
             ImgSrc={item.image[0]}
-            slug={`${item.subcategory.slug}/${item.slug}`}
+            slug={`${item.category.slug}/${item.slug}`}
           />
         ))}
       </div>

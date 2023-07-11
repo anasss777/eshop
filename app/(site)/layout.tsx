@@ -24,12 +24,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <ContextProvider>
           <Header />
 
           <Navbar />
-          {children}
+          <main className="flex-grow">{children}</main>
           <Footer />
         </ContextProvider>
       </body>

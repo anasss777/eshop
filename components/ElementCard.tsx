@@ -10,14 +10,14 @@ type Props = {
 
 const ElementCard = (props: Props) => {
   return (
-    <div className="relative top-10 w-fit py-10 md:py-0">
+    <div className="relative top-10 w-fit py-10 md:py-0 md:mb-14">
       <Link href={props.slug}>
         <button
-          className="relative border-2 border-solid border-blue-400 w-[360px] md:w-96 h-64 rounded-xl p-1 mx-4 group hover:scale-[1.03]
+          className="relative border-2 border-solid border-blue-400 w-fit h-auto rounded-xl p-1 mx-4 group hover:scale-[1.03]
           duration-300 ease-linear transition-all"
         >
           <Image
-            className="rounded-xl w-[374px] h-[245px] group-hover:blur-[3px] object-scale-down"
+            className="rounded-xl w-[374px] h-fit group-hover:blur-[3px] object-scale-down"
             src={props.ImgSrc}
             width={500}
             height={500}

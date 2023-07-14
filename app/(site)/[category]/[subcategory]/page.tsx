@@ -27,9 +27,9 @@ const Subcategory = ({ params }: Props) => {
   }, [products, slug]);
 
   return (
-    <div className="flex flex-col px-10">
+    <div className="flex flex-col px-10 pb-16">
       <p className="pt-10 md:flex justify-center text-center text-4xl font-montserrat text-gray-600">
-        {filterdProducts[0]?.name}
+        {filterdProducts[0]?.subcategory.name}
       </p>
       <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 flex-col justify-center items-center">
         {filterdProducts.map((item) => (

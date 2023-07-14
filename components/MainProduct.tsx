@@ -1,6 +1,7 @@
 import { getProducts } from "@/sanity/sanity-utils";
 import { Product } from "@/types/Product";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const MainProduct = () => {
@@ -34,13 +35,17 @@ const MainProduct = () => {
 
         {/* Details of the product*/}
         <div className="md:flex md:flex-col md:gap-5 md:pl-10 lg:pl-10 justify-center">
-          <button
-            className="bg-blue-200 text-gray-500 text-2xl font-montserrat rounded-md border-2 border-blue-500 shadow-lightShadowing
+          <Link
+            href={`${products[0]?.category.slug}/${products[0]?.subcategory.slug}/${products[0]?.slug}`}
+          >
+            <button
+              className="bg-blue-200 text-gray-500 text-2xl font-montserrat rounded-md border-2 border-blue-500 shadow-lightShadowing
        px-6 py-1 w-fit hover:shadow-shadowing hover:bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 hover:text-white
        hover:font-bold hover:scale-105 duration-300 transition-all ease-linear"
-          >
-            Buy Now
-          </button>
+            >
+              Buy Now
+            </button>
+          </Link>
           <p
             className="text-4xl font-montserrat font-semibold pb-1 w-80 bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500
           bg-clip-text text-transparent"

@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div
-      className="relative h-80 w-full flex justify-center bg-gradient-to-b from-blue-300 to-gray-200 shadow-shadowing mt-32 md:px-0
+      className="relative h-80 w-full flex justify-center bg-gradient-to-b from-blue-300 to-gray-200 shadow-shadowing md:px-0
     px-10"
     >
       <div className="grid grid-cols-1 grid-rows-3">

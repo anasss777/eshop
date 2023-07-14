@@ -33,7 +33,7 @@ const Category = ({ params }: Props) => {
   }, [slug, subcategories]);
 
   return (
-    <div className="flex flex-col px-10">
+    <div className="flex flex-col px-10 pb-16">
       <p className="pt-10 md:flex justify-center text-center text-4xl font-montserrat text-gray-600">
         {categoty?.name}
       </p>

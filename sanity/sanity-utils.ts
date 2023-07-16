@@ -79,3 +79,51 @@ export async function getCategories(): Promise<Category[]> {
       }`
     );
   }
+
+  export async function getProductsDesc(): Promise<Product[]> {
+    return createClient(clientConfig).fetch(
+      groq`*[_type == "product"] | order(_createdAt desc){
+        _id,
+        _createdAt,
+        name,
+        "slug": slug.current,
+        "image": image[].asset->url,
+        price,
+        details,
+        category->{
+          name,
+          'image': image.asset->url,
+          "slug": slug.current
+        },
+        subcategory->{
+          name,
+          "slug": slug.current,
+          'image': image.asset->url,
+        }
+      }`
+    )
+  }
+
+  export async function getProductsAsc(): Promise<Product[]> {
+    return createClient(clientConfig).fetch(
+      groq`*[_type == "product"] | order(_createdAt asc){
+        _id,
+        _createdAt,
+        name,
+        "slug": slug.current,
+        "image": image[].asset->url,
+        price,
+        details,
+        category->{
+          name,
+          'image': image.asset->url,
+          "slug": slug.current
+        },
+        subcategory->{
+          name,
+          "slug": slug.current,
+          'image': image.asset->url,
+        }
+      }`
+    )
+  }

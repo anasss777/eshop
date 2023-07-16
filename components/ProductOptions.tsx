@@ -26,7 +26,7 @@ const ProductOptions = (props: Props) => {
   };
 
   return (
-    <div className="relative w-full md:h-[670px] h-[600px] bg-gradient-to-br from-gray-200 to-blue-300 right-0">
+    <div className="relative w-full md:h-[670px] h-fit pb-56 bg-gradient-to-br from-gray-200 to-blue-300 right-0">
       {/* Product's name */}
       <p className="relative md:top-[120px] top-14 text-gray-500 text-[30px] text-center font-montserrat px-12">
         {props.productName}

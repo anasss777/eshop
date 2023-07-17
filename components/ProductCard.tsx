@@ -43,7 +43,7 @@ const ProductCard = (props: Props) => {
         </div>
 
         {/* Product name */}
-        <p className=" relative top-[50px] flex text-[17px] text-gray-500 my-4 font-montserrat leading-7">
+        <p className=" relative top-[50px] flex text-[17px] text-gray-500 font-semibold my-4 font-montserrat leading-7">
           {props.title}
         </p>
 
@@ -56,7 +56,7 @@ const ProductCard = (props: Props) => {
       </div>
       <button
         className="relative top-[90px] flex bg-blue-200 text-blue-400 font-montserrat font-bold w-[95%] mx-auto rounded-md justify-center
-        text-center text-[19px] hover:scale-105 hover:bg-blue-400 transition-all duration-300 ease-linear"
+        text-center text-[19px] hover:scale-105 hover:bg-blue-400 hover:text-blue-200 transition-all duration-300 ease-linear"
         onClick={handleAddToCart}
       >
         <p>Add to cart</p>

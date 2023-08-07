@@ -1,9 +1,11 @@
 "use client";
 
+import ProductCard from "@/components/ProductCard";
 import ProductImg from "@/components/ProductImg";
 import ProductOptions from "@/components/ProductOptions";
 import { getProducts } from "@/sanity/sanity-utils";
 import { Product } from "@/types/Product";
+import findSimilarProducts from "@/utils/findSimilarProducts";
 import { PortableText } from "@portabletext/react";
 import React, { useEffect, useState } from "react";
 
@@ -15,6 +17,7 @@ const Product = ({ params }: Props) => {
   const slug = params.product;
   const [products, setProducts] = useState<Product[]>([]);
   const [currentProduct, setCurrentProduct] = useState<Product>();
+  const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,10 +26,13 @@ const Product = ({ params }: Props) => {
       setCurrentProduct(
         products.filter((elements) => elements?.slug == slug)[0]
       );
+      if (currentProduct) {
+        setSimilarProducts(findSimilarProducts(currentProduct, products));
+      }
     };
 
     fetchData();
-  }, [products, slug]);
+  }, [currentProduct, products, slug]);
 
   if (!currentProduct) {
     return <p>Loading...</p>;
@@ -49,6 +55,28 @@ const Product = ({ params }: Props) => {
           Description
         </p>
         <PortableText value={currentProduct.details} />
+      </div>
+
+      {/* Similar products */}
+      <div className="bg-gradient-to-t from-blue-400 to-blue-200 flex flex-col h-fit w-full pt-10">
+        <div className="flex mx-auto mb-10">
+          <h1 className="font-montserrat text-gray-600 text-3xl font-semibold">
+            Similar Products
+          </h1>
+        </div>
+
+        <div className="flex overflow-x-scroll scroll-smooth lg:overflow-x-hidden lg:mx-auto lg:grid lg:grid-cols-3 lg:grid-rows-1">
+          {similarProducts.slice(0, 3).map((product) => (
+            <ProductCard
+              key={product._id}
+              imgsrc={product?.image[0]}
+              title={product?.name}
+              price={product?.price}
+              slug={`/${product?.category?.slug}/${product?.subcategory.slug}/${product?.slug}`}
+              currentProduct={product}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

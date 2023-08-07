@@ -148,8 +148,9 @@ const Cart = () => {
 
                       <p className="relative font-mcLaren text-lg md:text-xl lg:text-2xl text-gray-600">
                         <span className="font-montserrat">Total</span> $
-                        {(cartItem.product.price * cartItem.quantity * 100) /
-                          100}
+                        {Math.floor(
+                          cartItem.product.price * cartItem.quantity * 100
+                        ) / 100}
                       </p>
                     </div>
 

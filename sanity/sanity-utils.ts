@@ -3,6 +3,7 @@ import { createClient, groq } from "next-sanity";
 import clientConfig from "./lib/client";
 import { Product } from "@/types/Product";
 import { Subcategory } from "@/types/Subcategory";
+import { UserProfile } from "@/types/UserProfile";
 
 export async function getProducts(): Promise<Product[]> {
   return createClient(clientConfig).fetch(
@@ -124,6 +125,19 @@ export async function getCategories(): Promise<Category[]> {
           "slug": slug.current,
           'image': image.asset->url,
         }
+      }`
+    )
+  }
+
+  export async function getUsers(): Promise<UserProfile[]> {
+    return createClient(clientConfig).fetch(
+      groq`*[_type == "userProfile"]{
+        _id,
+        _createdAt,
+        name,
+        "slug": slug.current,
+        email,
+        "image": image.asset->url,
       }`
     )
   }

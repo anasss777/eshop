@@ -14,6 +14,7 @@ const clientConfig = {
   dataset: dataset,
   apiVersion: apiVersion,
   useCdn: true,
+  token: process.env.SANITY_WRITE_KEY,
 }
 
 export default clientConfig;

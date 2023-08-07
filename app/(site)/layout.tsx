@@ -3,6 +3,7 @@ import { ContextProvider } from "@/context/stateContext";
 import "../globals.css";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "E-Shop",
@@ -23,14 +24,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <ContextProvider>
-          {/* Header */}
           <Header />
 
-          {/* Navbar */}
           <Navbar />
-          {children}
+          <main className="flex-grow">{children}</main>
+          <Footer />
         </ContextProvider>
       </body>
     </html>

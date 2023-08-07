@@ -1,3 +1,4 @@
+import { PortableTextBlock } from "sanity";
 import { Category } from "./Category";
 import { Subcategory } from "./Subcategory";
 
@@ -9,7 +10,7 @@ export type Product = {
   image: string[];
   price: number;
   quantity: number;
-  details: string[];
+  details: PortableTextBlock[];
   category: Category;
   subcategory: Subcategory;
 }

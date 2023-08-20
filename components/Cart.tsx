@@ -112,7 +112,9 @@ const Cart = () => {
                 <span className="relative top-[-40px] left-[45px]">
                   {item.product.name}
                   <br />
-                  {`$${(item.product.price * item.quantity * 100) / 100}`}
+                  {`$${
+                    Math.floor(item.product.price * item.quantity * 100) / 100
+                  }`}
                 </span>
 
                 <div className="relative top-[-64px] left-[170px] justify-center items-center flex w-[85px] h-6">

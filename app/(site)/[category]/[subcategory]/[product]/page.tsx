@@ -7,6 +7,7 @@ import { getProducts } from "@/sanity/sanity-utils";
 import { Product } from "@/types/Product";
 import findSimilarProducts from "@/utils/findSimilarProducts";
 import { PortableText } from "@portabletext/react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -35,7 +36,18 @@ const Product = ({ params }: Props) => {
   }, [currentProduct, products, slug]);
 
   if (!currentProduct) {
-    return <p>Loading...</p>;
+    return (
+      <div className="mt-10 flex flex-col justify-center font-mcLaren text-gray-700">
+        <p className="text-8xl text-center">Loading...</p>
+        <Image
+          src="/hourglass.gif"
+          alt="Laoding"
+          width={300}
+          height={300}
+          className="mt-10 flex justify-center mx-auto"
+        />
+      </div>
+    );
   }
 
   return (

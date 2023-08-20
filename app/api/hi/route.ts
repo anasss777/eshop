@@ -10,9 +10,8 @@ export async function POST(req: NextRequest) {
   await client.create({
     _type: body._type,
     name: body.name,  
-    slug: {_type: "slug", current: body.slug},
     email: body.email,
-    image: body.image,
+    cartItems: body.cartItems,
   })
   console.log(body);
   
@@ -20,9 +19,8 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const body = await req.json();
   await client
-  .delete({query: `*[_type == ${body._type}][0]`})
+  .delete({query: `*[_type == "userProfile"]`})
   .then(() => {
     console.log('Deleted successfully!')
   })
@@ -31,11 +29,22 @@ export async function DELETE(req: NextRequest) {
   })
 }
 
+export async function UPDATE(req: NextRequest) {
+  const body = await req.json()
+  await client
+  .patch(body._id)
+  .append('cartItems', [body.cartItems])
+  .commit({autoGenerateArrayKeys: true})
+  console.log(body);
+
+  return new Response("OK")
+}
+
 export async function PUT(req: NextRequest) {
   const body = await req.json()
   await client
   .patch(body._id)
-  .set({name: body.name})
+  .set({cartItems: body.cartItems})
   .commit()
   console.log(body);
 

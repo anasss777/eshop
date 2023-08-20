@@ -1,34 +1,25 @@
 "use client";
 
+import { TheContext } from "@/context/stateContext";
 import { getUsers } from "@/sanity/sanity-utils";
+import { CartItem } from "@/types/CartItem";
 import { UserProfile } from "@/types/UserProfile";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const Test = () => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [inputUser, setInputUser] = useState({
     name: "n",
-    slug: "s",
     email: "e",
-    image: "i",
   });
 
-  // const handleImageUpload = (e: any) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const reader = new FileReader();
+  const cartContext = useContext(TheContext);
 
-  //     reader.onload = (event) => {
-  //       const dataURL = event.target?.result as string;
-  //       setInputUser((prevInputUser) => ({
-  //         ...prevInputUser,
-  //         image: dataURL,
-  //       }));
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+  if (!cartContext) {
+    // Handle the case when the context is not yet available
+    return null;
+  }
+  // const { cartItems } = cartContext;
 
   const handleClick = async () => {
     await fetch("/api/hi", {
@@ -36,9 +27,8 @@ const Test = () => {
       body: JSON.stringify({
         _type: "userProfile",
         name: inputUser.name,
-        slug: { _type: "slug", current: inputUser.slug },
         email: inputUser.email,
-        image: inputUser.image,
+        cart: [],
       }),
     });
     location.reload();
@@ -56,16 +46,15 @@ const Test = () => {
     location.reload();
   };
 
-  const handleDelete = async (type: any, id: string) => {
+  const deleteCartItems = async () => {
+    await fetch("/api/hello", {
+      method: "DELETE",
+    });
+  };
+
+  const deleteUserProfile = async () => {
     await fetch("/api/hi", {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _type: type,
-        _id: id,
-      }),
     });
   };
 
@@ -77,6 +66,7 @@ const Test = () => {
     }));
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const fetchedData = async () => {
       const fetchedUsers = await getUsers();
@@ -86,81 +76,48 @@ const Test = () => {
     fetchedData();
   }, [users]);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [newCartItems, setNewCartItems] = useState<CartItem[]>([]);
+
+  const userCart = async () => {
+    const response = await fetch("/api/hello", {
+      method: "POST",
+      body: JSON.stringify({
+        _type: "cartItem",
+        product: newCartItems[0]?.product,
+        quantity: 1,
+      }),
+    });
+
+    // if (!response.ok) {
+    //   throw new Error(`Error creating cartItems. Status: ${response.status}`);
+    // }
+
+    // const cartItems = await response.json();
+    // return cartItems;
+  };
+
   return (
-    <div className="pl-4 pt-4 flex flex-col">
-      {users.map((user, index) => (
-        <div key={index}>
-          <p>
-            Username {index + 1}: {user?.name}
-          </p>
-          <br />
-        </div>
-      ))}
-
-      <input
-        placeholder="Name"
-        name="name"
-        value={inputUser.name}
-        onChange={handleChange}
-        className="shadow-shadowing w-52 my-2 rounded-full px-2"
-      />
-      <input
-        placeholder="Slug"
-        name="slug"
-        value={inputUser.slug}
-        onChange={handleChange}
-        className="shadow-shadowing w-52 my-2 rounded-full px-2"
-      />
-      <input
-        placeholder="Email"
-        name="email"
-        value={inputUser.email}
-        onChange={handleChange}
-        className="shadow-shadowing w-52 my-2 rounded-full px-2"
-      />
-
-      <div className="w-52 my-2">
-        <input
-          type="file"
-          accept="image/*"
-          id="uploadImage"
-          style={{ display: "none" }}
-          // onChange={handleImageUpload}
-        />
-        <label
-          htmlFor="uploadImage"
-          className="bg-blue-400 py-1 px-3 mt-5 rounded-full w-fit shadow-md cursor-pointer"
-        >
-          Upload Image
-        </label>
-      </div>
-
-      <p>{inputUser.name}</p>
-      <p>{inputUser.slug}</p>
-      <p>{inputUser.email}</p>
-      <p>{inputUser.image}</p>
-
-      <br />
-
+    <div>
       <button
-        className="bg-blue-400 py-1 px-3 mt-5 rounded-full w-fit shadow-md"
-        onClick={() => handleUpdate(users[0]._id)}
+        onClick={userCart}
+        className="bg-blue-700 py-1 px-3 m-20 rounded-md text-white font-montserrat"
       >
-        Update
+        Create Cart
       </button>
 
       <button
-        className="bg-blue-400 py-1 px-3 mt-5 rounded-full w-fit shadow-md"
-        onClick={() => handleClick()}
+        onClick={deleteCartItems}
+        className="bg-blue-700 py-1 px-3 m-20 rounded-md text-white font-montserrat"
       >
-        Create
+        Delete Cart Items
       </button>
 
       <button
-        className="bg-blue-400 py-1 px-3 mt-5 rounded-full w-fit shadow-md"
-        onClick={() => handleDelete(users[0]._type, users[0]._id)}
+        onClick={deleteUserProfile}
+        className="bg-blue-700 py-1 px-3 m-20 rounded-md text-white font-montserrat"
       >
-        Delete
+        Delete User Profile
       </button>
     </div>
   );

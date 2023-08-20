@@ -135,9 +135,8 @@ export async function getCategories(): Promise<Category[]> {
         _id,
         _createdAt,
         name,
-        "slug": slug.current,
         email,
-        "image": image.asset->url,
+        cartItems[]
       }`
     )
   }

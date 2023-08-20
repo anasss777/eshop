@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Provider from "@/components/Provider";
 
 export const metadata = {
   title: "E-Shop",
@@ -26,11 +27,13 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen">
         <ContextProvider>
-          <Header />
+          <Provider>
+            <Header />
 
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </Provider>
         </ContextProvider>
       </body>
     </html>

@@ -29,16 +29,16 @@ export async function DELETE(req: NextRequest) {
   })
 }
 
-export async function UPDATE(req: NextRequest) {
-  const body = await req.json()
-  await client
-  .patch(body._id)
-  .append('cartItems', [body.cartItems])
-  .commit({autoGenerateArrayKeys: true})
-  console.log(body);
+// export async function UPDATE(req: NextRequest) {
+//   const body = await req.json()
+//   await client
+//   .patch(body._id)
+//   .append('cartItems', [body.cartItems])
+//   .commit({autoGenerateArrayKeys: true})
+//   console.log(body);
 
-  return new Response("OK")
-}
+//   return new Response("OK")
+// }
 
 export async function PUT(req: NextRequest) {
   const body = await req.json()

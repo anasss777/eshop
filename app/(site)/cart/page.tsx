@@ -16,11 +16,13 @@ const Cart = () => {
 
   const {
     cartItems,
+    setCartItems,
+
     increaseQuantity,
     decreaseQuantity,
     handleQuantityChange,
+
     removeFromCart,
-    setCartItems,
   } = cartContext;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks

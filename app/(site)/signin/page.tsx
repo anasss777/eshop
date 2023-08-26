@@ -2,6 +2,7 @@
 // import GoogleSignInButton from "@/components/GoogleSignInButton";
 // import { getServerSession } from "next-auth";
 // import { redirect } from "next/navigation";
+"use client";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import React from "react";

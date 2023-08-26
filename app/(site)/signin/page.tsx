@@ -1,18 +1,15 @@
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// import GoogleSignInButton from "@/components/GoogleSignInButton";
-// import { getServerSession } from "next-auth";
-// import { redirect } from "next/navigation";
-"use client";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import React from "react";
+import options from "@/app/api/auth/[...nextauth]/options";
+import SignInButtons from "@/components/SignInButtons";
 
 const signin = async () => {
-  //   const session = await getServerSession(authOptions);
+  const session = await getServerSession(options);
 
-  //   if (session) {
-  //     redirect("/success");
-  //   }
+  if (session) {
+    redirect("/signout");
+  }
 
   return (
     <div className="relative flex justify-center items-center h-[700px] w-full bg-gradient-to-b from-blue-300 to-gray-200">
@@ -34,17 +31,7 @@ const signin = async () => {
           </span>
         </p>
 
-        {/* <GoogleSignInButton /> */}
-        <div>
-          <button
-            className="relative top-5 flex justify-center items-center shadow-lightShadowing text-xl p-2 rounded-xl text-gray-600
-        font-montserrat hover:scale-[1.03] hover:shadow-shadowing duration-300 transition-all ease-linear"
-            onClick={() => signIn("google")}
-          >
-            <Image src="/Google.png" alt="Google logo" width={20} height={20} />{" "}
-            &nbsp; Sign in with Google
-          </button>
-        </div>
+        <SignInButtons />
       </div>
     </div>
   );

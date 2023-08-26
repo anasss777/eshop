@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/context/AuthProvider";
 
 export const metadata = {
   title: "E-Shop",
@@ -25,13 +26,15 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen">
-        <ContextProvider>
-          <Header />
+        <AuthProvider>
+          <ContextProvider>
+            <Header />
 
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </ContextProvider>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </ContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

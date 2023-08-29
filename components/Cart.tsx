@@ -6,16 +6,6 @@ import { TheContext } from "@/context/stateContext";
 import { Product } from "@/types/Product";
 import Link from "next/link";
 
-{
-  /* <Image
-        src="/cart.png"
-        alt="cart logo"
-        height={5}
-        width={30}
-        className="object-scale-down invert-[90%] float-right py-2 mr-4 h-auto w-auto"
-      /> */
-}
-
 const Cart = () => {
   const cartContext = useContext(TheContext);
 
@@ -65,7 +55,7 @@ const Cart = () => {
       {showCart &&
         (cartItems.length == 0 ? (
           <div
-            className="relative flex flex-col justify-center items-center w-[285px] h-[400px] float-right mr-[78px] bg-gray-200 rounded-md
+            className="relative flex flex-col justify-center items-center w-[285px] h-[400px] float-right mr-[147px] bg-gray-200 rounded-md
           shadow-md z-30 -top-3"
           >
             <button
@@ -86,7 +76,7 @@ const Cart = () => {
             />
           </div>
         ) : (
-          <div className="relative flex flex-col w-[285px] float-right mr-[78px] -top-3 bg-gray-200 rounded-md shadow-md z-30">
+          <div className="relative flex flex-col w-[285px] float-right mr-[147px] -top-3 bg-gray-200 rounded-md shadow-md z-30">
             {/* Close button */}
             <button
               className="relative left-[260px] top-[4px] flex justify-center items-center rounded-full h-5 w-5 pb-1 mb-1 font-mcLaren

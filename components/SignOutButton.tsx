@@ -8,7 +8,8 @@ const SignOutButton = async () => {
     <div>
       <button
         onClick={() => signOut()}
-        className="py-1 px-3 text-white font-bold bg-blue-400 rounded-md shadow-shadowing"
+        className="py-1 px-3 text-white font-light bg-red-500 rounded-md shadow-lightShadowing hover:shadow-shadowing hover:scale-105
+        hover:font-bold duration-300 transition-all ease-linear"
       >
         Sign Out
       </button>

@@ -8,7 +8,7 @@ const signin = async () => {
   const session = await getServerSession(options);
 
   if (session) {
-    redirect("/signout");
+    redirect("/");
   }
 
   return (

@@ -1,4 +1,5 @@
 import options from "@/app/api/auth/[...nextauth]/options";
+import EditProfile from "@/components/EditProfile";
 import SignOutButton from "@/components/SignOutButton";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -9,7 +10,7 @@ const profile = async () => {
   const session = await getServerSession(options);
 
   if (!session) {
-    redirect("/");
+    redirect("/signin");
   }
 
   return (
@@ -27,56 +28,14 @@ const profile = async () => {
             width={200}
           />
         )}
-        <p className="font-bold text-white my-2">
+        <p className="font-extrabold mt-2 bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 bg-clip-text text-transparent">
           {session.user?.name?.toUpperCase()}
         </p>
+        <p className="mb-3 text-white">{session.user?.email}</p>
         <SignOutButton />
       </div>
-      <div className="float-left mb-5 py-1 w-fit shadow-md px-2">
-        <p className="mb-3">
-          <span className="font-bold text-white">Email :</span>{" "}
-          {session.user?.email}
-        </p>
-        <div className="flex flex-row mb-3">
-          <p className="font-bold text-white">Phone number :</p>
-          <input
-            type="text"
-            className="rounded-md ml-2 px-1 focus:border-2 focus:border-blue-500 outline-none border border-blue-500"
-          />
-        </div>
-        <div className="flex flex-row mb-3">
-          <p className="font-bold text-white">Country :</p>
-          <input
-            type="text"
-            className="rounded-md ml-2 px-1 relative left-[57.5px] focus:border-2 focus:border-blue-500 outline-none border
-            border-blue-500"
-          />
-        </div>
-        <div className="flex flex-row mb-3">
-          <p className="font-bold text-white">State :</p>
-          <input
-            type="text"
-            className="rounded-md ml-2 px-1 relative left-[80.5px] focus:border-2 focus:border-blue-500 outline-none border
-            border-blue-500"
-          />
-        </div>
-        <div className="flex flex-row mb-3">
-          <p className="font-bold text-white">City :</p>
-          <input
-            type="text"
-            className="rounded-md ml-2 px-1 relative left-[91px] focus:border-2 focus:border-blue-500 outline-none border
-            border-blue-500"
-          />
-        </div>
-        <div className="flex flex-row mb-3">
-          <p className="font-bold text-white">Zip code :</p>
-          <input
-            type="text"
-            className="rounded-md ml-2 px-1 relative left-[53px] focus:border-2 focus:border-blue-500 outline-none border
-            border-blue-500"
-          />
-        </div>
-      </div>
+
+      <EditProfile />
     </div>
   );
 };

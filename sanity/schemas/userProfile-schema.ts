@@ -23,12 +23,29 @@ export const userProfile = {
         type: 'string',
       },
       {
-        name: 'image',
-        title: 'Image',
-        type: 'image',
-          options: {
-            hotspot: true,
-          }
+        name: 'phoneNumber',
+        title: 'Phone number',
+        type: 'number'
+      },
+      {
+        name: 'country',
+        title: 'Country',
+        type: 'string',
+      },
+      {
+        name: 'state',
+        title: 'State',
+        type: 'string',
+      },
+      {
+        name: 'city',
+        title: 'City',
+        type: 'string',
+      },
+      {
+        name: 'zipCode',
+        title: 'Zip code',
+        type: 'number',
       }
     ]
   }

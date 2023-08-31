@@ -5,6 +5,10 @@ export type UserProfile = {
     name: string;
     slug: string;
     email: string;
-    image: string;
+    phoneNumber: number;
+    country: string;
+    state: string;
+    city: string;
+    zipCode: number;
   }
   

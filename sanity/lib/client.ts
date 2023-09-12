@@ -13,7 +13,7 @@ const clientConfig = {
   projectId: projectId,
   dataset: dataset,
   apiVersion: apiVersion,
-  useCdn: true,
+  useCdn: false,
   token: process.env.SANITY_WRITE_KEY,
 }
 

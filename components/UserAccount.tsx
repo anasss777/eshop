@@ -1,11 +1,12 @@
-import options from "@/app/api/auth/[...nextauth]/options";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import HiUser from "./HiUser";
 
 const UserAccount = async () => {
-  const sessionData = await getServerSession(options);
+  const sessionData = await getServerSession(authOptions);
   return (
     <div>
       {sessionData?.user ? (
@@ -31,8 +32,12 @@ const UserAccount = async () => {
               />
             </Link>
           )}
-          <p className="px-2 text-white font-montserrat font-bold mt-1">
-            Hi, {sessionData?.user?.name?.split(" ")[0]}
+          <p className="px-2 text-white font-montserrat font-bold mt-1 flex flex-row">
+            {sessionData.user.name ? (
+              `Hi, ${sessionData?.user?.name?.split(" ")[0]}`
+            ) : (
+              <HiUser />
+            )}
           </p>
         </div>
       ) : (

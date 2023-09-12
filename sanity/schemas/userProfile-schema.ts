@@ -8,19 +8,15 @@ export const userProfile = {
         title: 'Name',
         type: 'string',
       },
-      { 
-        name: 'slug',
-        title: 'Slug',
-        type: 'slug',
-        options: {
-          source: 'name',
-          maxLength: 90,
-        }
-      },
       {
         name: 'email',
         title: 'Email',
         type: 'string',
+      },
+      {
+        name: 'password',
+        title: 'Password',
+        type: 'string'
       },
       {
         name: 'phoneNumber',
@@ -33,13 +29,13 @@ export const userProfile = {
         type: 'string',
       },
       {
-        name: 'state',
-        title: 'State',
+        name: 'city',
+        title: 'City',
         type: 'string',
       },
       {
-        name: 'city',
-        title: 'City',
+        name: 'region',
+        title: 'Region',
         type: 'string',
       },
       {

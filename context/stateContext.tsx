@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/types/Product";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 interface CartItem {
   product: Product;
@@ -24,6 +24,10 @@ export interface contextType {
   increaseQuantity: (product: Product, qty: number) => void;
   handleQuantityChange: (product: Product, quantity: number) => void;
   decreaseQuantity: (product: Product) => void;
+
+  setUserName: (user: string) => void;
+  setUserEmail: (user: string) => void;
+  removeUser: () => void;
 }
 
 const TheContext = createContext<contextType | undefined>(undefined);
@@ -32,6 +36,35 @@ const ContextProvider = ({ children }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
+
+  const setUserName = (userName: string) => {
+    try {
+      localStorage.setItem("userName", userName);
+    } catch (error) {
+      console.error("Error setting userName in localStorage:", error);
+    }
+  };
+
+  const setUserEmail = (userEmail: string) => {
+    try {
+      localStorage.setItem("userEmail", userEmail);
+    } catch (error) {
+      console.error("Error setting userEmail in localStorage:", error);
+    }
+  };
+
+  const removeUser = () => {
+    try {
+      console.log(`Before removing: ${localStorage.getItem("userName")}`);
+      console.log(`Before removing: ${localStorage.getItem("userEmail")}`);
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+      console.log(`After removing: ${localStorage.getItem("userName")}`);
+      console.log(`After removing: ${localStorage.getItem("userEmail")}`);
+    } catch (error) {
+      console.error("Error removing user from localStorage:", error);
+    }
+  };
 
   const addToCart = (item: CartItem) => {
     const existingItem = cartItems.find(
@@ -100,11 +133,24 @@ const ContextProvider = ({ children }: any) => {
         increaseQuantity,
         handleQuantityChange,
         decreaseQuantity,
+
+        setUserName,
+        setUserEmail,
+        removeUser,
       }}
     >
       {children}
     </TheContext.Provider>
   );
 };
+
+export function useStateContext() {
+  const context = useContext(TheContext);
+  if (!context) {
+    throw new Error("useStateContext must be used within contextProvider!");
+  }
+
+  return context;
+}
 
 export { TheContext, ContextProvider };

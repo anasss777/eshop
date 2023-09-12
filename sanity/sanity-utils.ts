@@ -135,9 +135,13 @@ export async function getCategories(): Promise<Category[]> {
         _id,
         _createdAt,
         name,
-        "slug": slug.current,
         email,
-        "image": image.asset->url,
+        password,
+        phoneNumber,
+        country,
+        city,
+        region,
+        zipCode
       }`
     )
   }

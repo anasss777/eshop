@@ -3,12 +3,12 @@ export type UserProfile = {
     _createdAt: Date;
     _type: UserProfile;
     name: string;
-    slug: string;
     email: string;
+    password: string;
     phoneNumber: number;
     country: string;
-    state: string;
     city: string;
+    region: string;
     zipCode: number;
   }
   

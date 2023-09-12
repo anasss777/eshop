@@ -1,11 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
-import options from "@/app/api/auth/[...nextauth]/options";
 import SignInButtons from "@/components/SignInButtons";
+import Link from "next/link";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const signin = async () => {
-  const session = await getServerSession(options);
+  const session = await getServerSession(authOptions);
 
   if (session) {
     redirect("/");
@@ -18,7 +20,7 @@ const signin = async () => {
         shadow-lightShadowing border border-solid border-blue-400"
       >
         <p
-          className="relative bottom-20 font-fancy w-[173px] text-6xl font-bold pb-2 px-1 bg-gradient-to-r from-purple-400 via-blue-700
+          className="relative -top-12 font-fancy w-[173px] text-6xl font-bold pb-2 px-1 bg-gradient-to-r from-purple-400 via-blue-700
           to-blue-500 bg-clip-text text-transparent"
         >
           E-Shop
@@ -32,6 +34,15 @@ const signin = async () => {
         </p>
 
         <SignInButtons />
+
+        <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-10 font-montserrat">
+          Error massage
+        </div>
+        {/* )} */}
+
+        <Link className="text-sm mt-3 text-right" href={"/register"}>
+          Don't have an account? <span className="underline">Register</span>
+        </Link>
       </div>
     </div>
   );

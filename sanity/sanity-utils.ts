@@ -145,3 +145,21 @@ export async function getCategories(): Promise<Category[]> {
       }`
     )
   }
+
+  export async function getUserByEmail(email: string): Promise<UserProfile> {
+    return createClient(clientConfig).fetch(
+      groq`*[_type == "userProfile" && email == $email][0]{
+        _id,
+        _createdAt,
+        name,
+        email,
+        password,
+        phoneNumber,
+        country,
+        city,
+        region,
+        zipCode
+      }`,
+      {email}     
+    )
+  }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useStateContext } from "@/context/stateContext";
+import { getUserByEmail } from "@/sanity/sanity-utils";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,20 +26,12 @@ const RegisterCard = () => {
     }
 
     try {
-      //   const resUserExists = await fetch("api/userExists", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ email }),
-      //   });
+      const user = await getUserByEmail(email);
 
-      //   const { user } = await resUserExists.json();
-
-      //   if (user) {
-      //     setError("User already exists.");
-      //     return;
-      //   }
+      if (user) {
+        setError("User already exists.");
+        return;
+      }
 
       const res = await fetch("api/hi", {
         method: "POST",

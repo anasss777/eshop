@@ -43,8 +43,8 @@ const profile = async () => {
           </Link>
         )}
         {session.user?.name ? (
-          <div>
-            <p className="font-extrabold mt-2 bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 bg-clip-text text-transparent">
+          <div className="flex flex-col">
+            <p className="font-extrabold mt-2 bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 bg-clip-text text-transparent mx-auto">
               {session.user?.name?.toUpperCase()}
             </p>
             <p className="mb-3 text-white">{session.user?.email}</p>

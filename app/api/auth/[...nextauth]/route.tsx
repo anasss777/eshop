@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
+import bcrypt from "bcryptjs";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -19,22 +20,42 @@ export const authOptions: AuthOptions = {
       },
 
       async authorize(credentials) {
-        const user = await client.fetch(
-          groq`*[email match ${credentials?.email}]{
+        const email = credentials?.email as string;
+        const password = credentials?.password as string;
+
+        try {
+          const fetchUser = () =>
+            client.fetch(
+              groq`*[_type == "userProfile" && email == $email][0]{
+              _id,
+              _createdAt,
               name,
               email,
-              password
-            }`
-        );
+              password,
+              phoneNumber,
+              country,
+              city,
+              region,
+              zipCode
+            }`,
+              { email }
+            );
 
-        if (
-          credentials?.name === user.name &&
-          credentials?.email === user.email &&
-          credentials?.password === user.password
-        ) {
+          const user = await fetchUser();
+
+          if (!user) {
+            return null;
+          }
+
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+
+          if (!passwordsMatch) {
+            return null;
+          }
+
           return user;
-        } else {
-          return null;
+        } catch (error) {
+          console.log("Error: ", error);
         }
       },
     }),

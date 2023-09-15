@@ -1,14 +1,12 @@
 "use client";
 
-import { getUserByEmail } from "@/sanity/sanity-utils";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import SignInButtons from "./SignInButtons";
 
-const RegisterCard = () => {
-  const [name, setName] = useState("");
+const SignInCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,57 +16,31 @@ const RegisterCard = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
-      setError("All fields are necessary.");
-      return;
-    }
-
     try {
-      const user = await getUserByEmail(email);
+      const res = await signIn("credentials", {
+        email,
+        password,
+      });
 
-      if (user) {
-        setError("User already exists.");
+      if (res?.error) {
+        setError("Email or Password is wrong!");
         return;
       }
 
-      const res = await fetch("api/hi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
-
-      if (res.ok) {
-        signIn("credentials");
-        signIn("credentials", {
-          email,
-          password,
-        });
-        const form = e.target;
-        form.reset();
-        router.push("/");
-      } else {
-        console.log("User registration failed.");
-      }
+      router.replace("/");
     } catch (error) {
-      console.log("Error during registration: ", error);
+      console.log(error);
     }
   };
-
   return (
     <div className="relative flex justify-center items-center h-[700px] w-full bg-gradient-to-b from-blue-300 to-gray-200">
       <div
         className="flex flex-col justify-center items-center h-fit w-[500px] bg-transparent rounded-xl backdrop-blur-3xl px-12 py-10
-          shadow-lightShadowing border border-solid border-blue-400"
+      shadow-lightShadowing border border-solid border-blue-400"
       >
         <p
           className="font-fancy w-[173px] text-6xl font-bold pb-2 px-1 bg-gradient-to-r from-purple-400 via-blue-700
-            to-blue-500 bg-clip-text text-transparent"
+        to-blue-500 bg-clip-text text-transparent"
         >
           E-Shop
         </p>
@@ -80,12 +52,6 @@ const RegisterCard = () => {
           </span>
         </p>
 
-        <input
-          onChange={(e) => setName(e.target.value)}
-          className="w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
-          placeholder="Username"
-          type="text"
-        />
         <input
           onChange={(e) => setEmail(e.target.value)}
           className="w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
@@ -102,9 +68,9 @@ const RegisterCard = () => {
         <button
           onClick={handleSubmit}
           className="bg-green-600 text-white font-montserrat cursor-pointer px-6 py-2 rounded-md hover:font-bold hover:scale-105
-          transition-all duration-300 ease-linear"
+      transition-all duration-300 ease-linear"
         >
-          Register
+          Login
         </button>
 
         {error && (
@@ -116,11 +82,12 @@ const RegisterCard = () => {
         <SignInButtons />
 
         <Link className="text-sm mt-10 font-montserrat" href={"/signin"}>
-          Already have an account? <span className="underline">Signin</span>
+          Don&apos;t have an account?{" "}
+          <span className="underline">Register</span>
         </Link>
       </div>
     </div>
   );
 };
 
-export default RegisterCard;
+export default SignInCard;

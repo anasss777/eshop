@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import SignInButtons from "./SignInButtons";
+import { getUserByEmail } from "@/sanity/sanity-utils";
+import bcrypt from "bcryptjs";
 
 const SignInCard = () => {
   const [email, setEmail] = useState("");
@@ -17,9 +19,17 @@ const SignInCard = () => {
     e.preventDefault();
 
     try {
+      const userEmail = await getUserByEmail(email);
+      const passwordsMatch = await bcrypt.compare(password, userEmail.password);
+
+      if (!passwordsMatch) {
+        setError("Wrong Password! Please try again.");
+      }
+
       const res = await signIn("credentials", {
         email,
         password,
+        redirect: false,
       });
 
       if (res?.error) {
@@ -27,7 +37,8 @@ const SignInCard = () => {
         return;
       }
 
-      router.replace("/");
+      router.push("/");
+      location.reload();
     } catch (error) {
       console.log(error);
     }

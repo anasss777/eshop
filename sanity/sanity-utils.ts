@@ -146,7 +146,7 @@ export async function getCategories(): Promise<Category[]> {
     )
   }
 
-  export async function getUserByEmail(email: string): Promise<UserProfile> {
+  export async function getUserByEmail(email: string): Promise<UserProfile | null> {
     return createClient(clientConfig).fetch(
       groq`*[_type == "userProfile" && email == $email][0]{
         _id,

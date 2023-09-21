@@ -20,22 +20,24 @@ const SignInCard = () => {
 
     try {
       const userEmail = await getUserByEmail(email);
-      const passwordsMatch = await bcrypt.compare(password, userEmail.password);
+
+      if (!userEmail) {
+        setError("Check your email or register as new user");
+      }
+
+      const correctPassword = userEmail?.password as string;
+      const passwordsMatch = await bcrypt.compare(password, correctPassword);
 
       if (!passwordsMatch) {
         setError("Wrong Password! Please try again.");
+        return;
       }
 
-      const res = await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
-
-      if (res?.error) {
-        setError("Email or Password is wrong!");
-        return;
-      }
 
       router.push("/");
       location.reload();

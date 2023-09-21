@@ -99,7 +99,7 @@ const SignInCard = () => {
 
         <SignInButtons />
 
-        <Link className="text-sm mt-10 font-montserrat" href={"/signin"}>
+        <Link className="text-sm mt-10 font-montserrat" href={"/register"}>
           Don&apos;t have an account?{" "}
           <span className="underline">Register</span>
         </Link>

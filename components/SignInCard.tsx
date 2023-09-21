@@ -21,6 +21,11 @@ const SignInCard = () => {
     try {
       const userEmail = await getUserByEmail(email);
 
+      if (!email || !password) {
+        setError("All fields are necessary.");
+        return;
+      }
+
       if (!userEmail) {
         setError("Check your email or register as new user");
       }

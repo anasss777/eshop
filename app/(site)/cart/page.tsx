@@ -1,19 +1,12 @@
 "use client";
 
-import { TheContext } from "@/context/stateContext";
+import { useStateContext } from "@/context/stateContext";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Cart = () => {
-  const cartContext = useContext(TheContext);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  if (!cartContext) {
-    // Handle the case when the context is not yet available
-    return;
-  }
-
   const {
     cartItems,
     setCartItems,
@@ -23,9 +16,21 @@ const Cart = () => {
     handleQuantityChange,
 
     removeFromCart,
-  } = cartContext;
+  } = useStateContext();
+  const [showContent, setShowContent] = useState(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    const delay = 3000;
+
+    const timeoutId = setTimeout(() => {
+      setShowContent(true);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   useEffect(() => {
     const itemTotalPrice = cartItems.map(
       (item) => item.product.price * item.quantity
@@ -181,7 +186,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : showContent ? (
         <div className="flex flex-col w-full">
           <p className="flex justify-center mt-10 font-montserrat text-5xl text-gray-600 text-center">
             Your cart is empty
@@ -199,6 +204,17 @@ const Cart = () => {
               height={300}
             />
           </div>
+        </div>
+      ) : (
+        <div className="mt-10 flex flex-col justify-center font-mcLaren text-gray-700">
+          <p className="text-8xl text-center">Loading...</p>
+          <Image
+            src="/hourglass.gif"
+            alt="Laoding"
+            width={300}
+            height={300}
+            className="mt-10 flex justify-center mx-auto"
+          />
         </div>
       )}
     </div>

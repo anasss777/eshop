@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/types/Product";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface CartItem {
   product: Product;
@@ -36,6 +36,19 @@ const ContextProvider = ({ children }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
+
+  // Load cart items from localStorage when the component initializes
+  useEffect(() => {
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
+    }
+  }, []);
+
+  // Update localStorage whenever cartItems changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const setUserName = (userName: string) => {
     try {

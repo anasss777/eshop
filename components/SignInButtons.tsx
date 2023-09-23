@@ -8,7 +8,7 @@ const SignInButtons = () => {
   return (
     <div>
       <button
-        className="relative top-5 flex justify-center items-center shadow-lightShadowing text-xl p-2 rounded-xl text-gray-600
+        className="relative top-5 flex justify-center items-center shadow-lightShadowing md:text-xl text-base p-2 rounded-xl text-gray-600
         font-montserrat hover:scale-[1.03] hover:shadow-shadowing duration-300 transition-all ease-linear"
         onClick={() => signIn("google")}
       >

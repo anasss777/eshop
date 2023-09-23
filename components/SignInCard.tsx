@@ -51,19 +51,19 @@ const SignInCard = () => {
     }
   };
   return (
-    <div className="relative flex justify-center items-center h-[700px] w-full bg-gradient-to-b from-blue-300 to-gray-200">
+    <div className="relative flex justify-center items-center h-[600px] sm:h-[700px] w-full bg-gradient-to-b from-blue-300 to-gray-200">
       <div
-        className="flex flex-col justify-center items-center h-fit w-[500px] bg-transparent rounded-xl backdrop-blur-3xl px-12 py-10
-      shadow-lightShadowing border border-solid border-blue-400"
+        className="flex flex-col justify-center items-center h-fit w-[300px] sm:w-[500px] bg-transparent rounded-xl backdrop-blur-3xl sm:px-12
+        px-8 py-10 shadow-lightShadowing border border-solid border-blue-400 text-center"
       >
         <p
-          className="font-fancy w-[173px] text-6xl font-bold pb-2 px-1 bg-gradient-to-r from-purple-400 via-blue-700
+          className="font-fancy w-[173px] sm:text-6xl text-5xl font-bold pb-2 px-1 bg-gradient-to-r from-purple-400 via-blue-700
         to-blue-500 bg-clip-text text-transparent"
         >
           E-Shop
         </p>
 
-        <p className="font-montserrat text-gray-600 text-2xl text-center">
+        <p className="font-montserrat text-gray-600 sm:text-2xl text-xl text-center">
           Enjoy endless bargains by becoming a member of{" "}
           <span className="font-bold font-fancy bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 bg-clip-text text-transparent">
             E-Shop
@@ -72,27 +72,27 @@ const SignInCard = () => {
 
         <input
           onChange={(e) => setEmail(e.target.value)}
-          className="w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
+          className="sm:w-[400px] w-[250px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
           placeholder="Email"
           type="text"
         />
         <input
           onChange={(e) => setPassword(e.target.value)}
-          className="w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
+          className="sm:w-[400px] w-[250px] border border-gray-200 py-2 px-6 bg-zinc-100/40 my-3"
           placeholder="Password"
           type="password"
         />
 
         <button
           onClick={handleSubmit}
-          className="bg-green-600 text-white font-montserrat cursor-pointer px-6 py-2 rounded-md hover:font-bold hover:scale-105
+          className="bg-green-600 text-white font-montserrat cursor-pointer px-6 py-2 rounded-sm hover:font-bold hover:scale-105
       transition-all duration-300 ease-linear"
         >
           Login
         </button>
 
         {error && (
-          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2 float-left">
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-sm mt-2 float-left">
             {error}
           </div>
         )}

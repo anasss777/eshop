@@ -54,7 +54,7 @@ const Navbar = () => {
       <div className="flex flex-col relative md:hidden">
         {/* Search bar on mobile */}
         <form onSubmit={handleSearch}>
-          <div className="bg-blue-300 w-full h-12 flex justify-center items-center md:hidden">
+          <div className="bg-blue-300 w-full h-12 flex justify-center items-center border-b border-b-white md:hidden">
             <Image
               src={isOpen ? "/close.png" : "/menu.png"}
               alt="Menu"

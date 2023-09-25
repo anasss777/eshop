@@ -22,4 +22,7 @@
     .footerSocial {
       @apply invert hover:shadow-shadowing transition-all duration-300 rounded-full
     }
+    .inputStyle {
+      @apply rounded-md px-1 focus:border-2 focus:border-blue-500 outline-none border border-blue-500 mb-1
+    }
   }

@@ -55,7 +55,7 @@ const profile = async () => {
         <SignOutButton />
       </div>
 
-      <EditProfile />
+      <EditProfile userEmail={session.user?.email as string} />
     </div>
   );
 };

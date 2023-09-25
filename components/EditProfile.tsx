@@ -1,15 +1,15 @@
 "use client";
 
-import { getUsers } from "@/sanity/sanity-utils";
+import { getUserByEmail, getUsers } from "@/sanity/sanity-utils";
 import { UserProfile } from "@/types/UserProfile";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-export const inputStyle =
-  "rounded-md px-1 focus:border-2 focus:border-blue-500 outline-none border border-blue-500 mb-1";
+type Props = {
+  userEmail: string;
+};
 
-const EditProfile = () => {
+const EditProfile = (props: Props) => {
   const [enableEdit, setEnableEdit] = useState(false);
   const [userInfo, setUserInfo] = useState({
     phoneNumber: 1,
@@ -18,16 +18,12 @@ const EditProfile = () => {
     region: "Please Click Edit",
     zipCode: 1,
   });
-
-  const [currentUser, setCurrentUser] = useState<UserProfile>();
-  const { data: sessionData } = useSession();
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const fetchedUsers = await getUsers();
-      setCurrentUser(
-        fetchedUsers.filter((user) => user.email == sessionData?.user?.email)[0]
-      );
+      const fetchedUser = await getUserByEmail(props.userEmail);
+      setCurrentUser(fetchedUser);
     };
 
     fetchUsers();
@@ -79,12 +75,8 @@ const EditProfile = () => {
             <input
               type="text"
               min={-1}
-              value={String(
-                currentUser?.phoneNumber
-                  ? currentUser.phoneNumber
-                  : userInfo.phoneNumber
-              )}
-              className={inputStyle}
+              value={String(userInfo.phoneNumber)}
+              className="inputStyle"
               onChange={(e) =>
                 setUserInfo({
                   ...userInfo,
@@ -94,26 +86,24 @@ const EditProfile = () => {
             />
             <input
               type="text"
-              value={
-                currentUser?.country ? currentUser.country : userInfo.country
-              }
-              className={inputStyle}
+              value={userInfo.country}
+              className="inputStyle"
               onChange={(e) =>
                 setUserInfo({ ...userInfo, country: e.target.value })
               }
             />
             <input
               type="text"
-              value={currentUser?.city ? currentUser.city : userInfo.city}
-              className={inputStyle}
+              value={userInfo.city}
+              className="inputStyle"
               onChange={(e) =>
                 setUserInfo({ ...userInfo, city: e.target.value })
               }
             />
             <input
               type="text"
-              value={currentUser?.region ? currentUser.region : userInfo.region}
-              className={inputStyle}
+              value={userInfo.region}
+              className="inputStyle"
               onChange={(e) =>
                 setUserInfo({ ...userInfo, region: e.target.value })
               }
@@ -121,10 +111,8 @@ const EditProfile = () => {
             <input
               type="number"
               min={0}
-              value={String(
-                currentUser?.zipCode ? currentUser.zipCode : userInfo.zipCode
-              )}
-              className={inputStyle}
+              value={String(userInfo.zipCode)}
+              className="inputStyle"
               onChange={(e) =>
                 setUserInfo({
                   ...userInfo,
@@ -136,21 +124,19 @@ const EditProfile = () => {
         ) : (
           <div className="flex flex-col justify-end items-end">
             <p className="text-gray-200 font-bold mb-1 ml-[60px]">
-              {currentUser?.phoneNumber
-                ? currentUser.phoneNumber
-                : userInfo.phoneNumber}
+              {currentUser?.phoneNumber}
             </p>
             <p className="text-gray-200 font-bold mb-1 ml-[60px]">
-              {currentUser?.country ? currentUser.country : userInfo.country}
+              {currentUser?.country}
             </p>
             <p className="text-gray-200 font-bold mb-1 ml-[60px]">
-              {currentUser?.city ? currentUser.city : userInfo.city}
+              {currentUser?.city}
             </p>
             <p className="text-gray-200 font-bold mb-1 ml-[60px]">
-              {currentUser?.region ? currentUser.region : userInfo.region}
+              {currentUser?.region}
             </p>
             <p className="text-gray-200 font-bold mb-1 ml-[60px]">
-              {currentUser?.zipCode ? currentUser.zipCode : userInfo.zipCode}
+              {currentUser?.zipCode}
             </p>
           </div>
         )}
@@ -161,8 +147,10 @@ const EditProfile = () => {
         {enableEdit ? (
           <button
             onClick={() => {
-              setEnableEdit(false);
               editUser();
+              setTimeout(() => {
+                setEnableEdit(false);
+              }, 1000);
             }}
             className="py-1 px-3 rounded-md bg-green-400 mx-1 text-white shadow-lightShadowing hover:shadow-shadowing hover:scale-105 
       duration-300 transition-all ease-linear"

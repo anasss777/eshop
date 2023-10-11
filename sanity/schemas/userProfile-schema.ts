@@ -19,6 +19,11 @@ export const userProfile = {
         type: 'string'
       },
       {
+        name:'cart',
+        title:"Cart",
+        type: 'string'
+      },
+      {
         name: 'phoneNumber',
         title: 'Phone number',
         type: 'number'

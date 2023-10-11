@@ -45,16 +45,7 @@ const EditProfile = (props: Props) => {
 
   if (!currentUser) {
     return (
-      <div className="mt-10 flex flex-col justify-center font-mcLaren text-gray-700">
-        <p className="text-8xl text-center">Loading...</p>
-        <Image
-          src="/hourglass.gif"
-          alt="Laoding"
-          width={300}
-          height={300}
-          className="mt-10 flex justify-center mx-auto"
-        />
-      </div>
+      <div className="mt-10 flex flex-col justify-center font-mcLaren text-gray-700 h-52 w-72 bg-transparent animate-pulse shadow-md"></div>
     );
   }
 

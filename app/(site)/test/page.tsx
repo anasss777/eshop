@@ -1,14 +1,22 @@
 "use client";
 
-import { getUsers } from "@/sanity/sanity-utils";
+import { getUserByEmail, getUsers } from "@/sanity/sanity-utils";
+import { Product } from "@/types/Product";
 import { UserProfile } from "@/types/UserProfile";
+import { Button } from "@tremor/react";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+
+type CartItem = {
+  product: Product;
+  quantity: number;
+};
 
 const Test = () => {
   const [currentUser, setCurrentUser] = useState<UserProfile>();
   const [allUsers, setAllUsers] = useState<UserProfile[]>([]);
   const { data: sessionData } = useSession();
+  const [isTrue, setIsTrue] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -22,15 +30,39 @@ const Test = () => {
     fetchUsers();
   });
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userEmail = sessionData?.user?.email;
+      if (userEmail) {
+        const fetchedUser = await getUserByEmail(userEmail);
+        setCurrentUser(fetchedUser as UserProfile);
+      }
+    };
+
+    fetchUser();
+  }, [sessionData?.user?.email]);
+
   const handleDelete = async () => {
     await fetch("/api/hi", {
       method: "DELETE",
     });
   };
 
+  if (!currentUser) {
+    return;
+  }
+
+  let WhatsOntheCart: CartItem[] = [];
+  WhatsOntheCart = JSON.parse(currentUser.cart);
+
   return (
     <div className="flex flex-col mt-20 items-center">
-      {allUsers.map((user, index) => (
+      {WhatsOntheCart.map((item, index) => (
+        <p key={index}>
+          {item.product.name} {"-"} {item.quantity}
+        </p>
+      ))}
+      {/* {allUsers.map((user, index) => (
         <div key={index}>
           <p>{index}.</p>
           <p>{user?.name}</p>
@@ -49,7 +81,7 @@ const Test = () => {
         className="bg-blue-400 px-3 py-1 rounded-md text-white font-montserrat font-bold"
       >
         Delete
-      </button>
+      </button> */}
     </div>
   );
 };

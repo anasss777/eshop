@@ -5,6 +5,7 @@ export type UserProfile = {
     name: string;
     email: string;
     password: string;
+    cart: string;
     phoneNumber: number;
     country: string;
     city: string;

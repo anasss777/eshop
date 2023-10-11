@@ -117,8 +117,9 @@ const Cart = () => {
                         {/* Decrease quantity button */}
                         <button
                           onClick={() =>
-                            cartItem.quantity != 1 &&
-                            decreaseQuantity(cartItem.product)
+                            cartItem.quantity > 1
+                              ? decreaseQuantity(cartItem.product)
+                              : removeFromCart(cartItem.product)
                           }
                           className="mx-1 rounded-full bg-blue-700 h-7 w-7 md:h-9 md:w-9 font-extrabold font-mcLaren text-[17px]
                           hover:bg-blue-500 transition-all duration-300 ease-linear text-white"
@@ -179,7 +180,10 @@ const Cart = () => {
               <button
                 className="bg-red-500 px-5 py-1 rounded-md text-white font-montserrat font-bold shadow-lightShadowing 
             hover:shadow-shadowing hover:scale-105 duration-300 transition-all ease-linear"
-                onClick={() => setCartItems([])}
+                onClick={() => {
+                  setCartItems([]);
+                  localStorage.clear();
+                }}
               >
                 Clear Cart
               </button>

@@ -1,18 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { TheContext } from "@/context/stateContext";
+import React from "react";
+import { useStateContext } from "@/context/stateContext";
 import { Product } from "@/types/Product";
 import Link from "next/link";
 
 const Cart = () => {
-  const cartContext = useContext(TheContext);
-
-  if (!cartContext) {
-    // Handle the case when the context is not yet available
-    return null;
-  }
   const {
     cartItems,
     increaseQuantity,
@@ -21,7 +15,7 @@ const Cart = () => {
     setShowCart,
     setCartItems,
     removeFromCart,
-  } = cartContext;
+  } = useStateContext();
 
   const handleQuantityChange = (product: Product, quantity: number) => {
     if (quantity > 0) {
@@ -54,6 +48,7 @@ const Cart = () => {
       {/* Cart menu */}
       {showCart &&
         (cartItems.length == 0 ? (
+          // Empty cart
           <div
             className="relative flex flex-col justify-center items-center w-[285px] h-[400px] float-right mr-[147px] bg-gray-200 rounded-md
           shadow-md z-30 -top-3"

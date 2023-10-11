@@ -1,8 +1,7 @@
-import { TheContext } from "@/context/stateContext";
+import { useStateContext } from "@/context/stateContext";
 import { Product } from "@/types/Product";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
 
 type Props = {
   imgsrc: string;
@@ -13,14 +12,7 @@ type Props = {
 };
 
 const ProductCard = (props: Props) => {
-  const contextVar = useContext(TheContext);
-
-  if (!contextVar) {
-    // Handle the case when the context is not yet available
-    return null;
-  }
-
-  const { addToCart } = contextVar;
+  const { addToCart } = useStateContext();
 
   const handleAddToCart = () => {
     addToCart({ product: props.currentProduct, quantity: 1 });

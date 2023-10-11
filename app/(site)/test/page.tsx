@@ -3,7 +3,6 @@
 import { getUserByEmail, getUsers } from "@/sanity/sanity-utils";
 import { Product } from "@/types/Product";
 import { UserProfile } from "@/types/UserProfile";
-import { Button } from "@tremor/react";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 

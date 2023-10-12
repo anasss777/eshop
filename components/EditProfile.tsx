@@ -2,7 +2,6 @@
 
 import { getUserByEmail, getUsers } from "@/sanity/sanity-utils";
 import { UserProfile } from "@/types/UserProfile";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 type Props = {

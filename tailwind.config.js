@@ -15,6 +15,9 @@ module.exports = {
       boxShadow: {
         'shadowing': '0 0 10px 0 rgba(0, 0, 0, 0.5)',
         'lightShadowing': '0 0 10px 0 rgba(0, 0, 0, 0.2)'
+      },
+      animation: {
+        'spin-slow': 'spin 2s linear infinite',
       }
     },
   },

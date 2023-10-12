@@ -17,6 +17,7 @@ const MainProduct = () => {
             alt="Main Product"
             height={630}
             width={630}
+            loading="eager"
           />
         </div>
 

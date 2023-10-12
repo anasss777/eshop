@@ -27,7 +27,7 @@ const MainProduct = () => {
             <button
               className="bg-blue-200 text-gray-500 text-2xl font-montserrat rounded-md border-2 border-blue-500 shadow-lightShadowing
        px-6 py-1 w-fit hover:shadow-shadowing hover:bg-gradient-to-r from-purple-400 via-blue-700 to-blue-500 hover:text-white
-       hover:font-bold hover:scale-105 duration-300 transition-all ease-linear"
+       hover:font-bold hover:scale-[1.02] duration-300 transition-all ease-linear"
             >
               Buy Now
             </button>

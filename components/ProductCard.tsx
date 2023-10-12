@@ -20,7 +20,7 @@ const ProductCard = (props: Props) => {
 
   return (
     <div className="mb-40 mx-3">
-      <div className="rounded-md p-2 mx-1 hover:shadow-blue-400 hover:shadow-sm hover:scale-105 transition-all duration-300 ease-linear">
+      <div className="rounded-md p-2 mx-1 hover:shadow-blue-400 hover:shadow-sm hover:scale-[1.02] transition-all duration-300 ease-linear">
         {/* Product image */}
         <div className="h-[250px] w-[290px] overflow-hidden flex justify-center">
           <Link href={props.slug}>
@@ -48,7 +48,7 @@ const ProductCard = (props: Props) => {
       </div>
       <button
         className="relative top-[90px] flex bg-blue-200 text-blue-400 font-montserrat font-bold w-[95%] mx-auto rounded-md justify-center
-        text-center text-[19px] hover:scale-105 hover:bg-blue-400 hover:text-blue-200 transition-all duration-300 ease-linear"
+        text-center text-[19px] hover:scale-[1.02] hover:bg-blue-400 hover:text-blue-200 transition-all duration-300 ease-linear"
         onClick={handleAddToCart}
       >
         <p>Add to cart</p>

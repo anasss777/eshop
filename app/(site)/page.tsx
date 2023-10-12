@@ -7,7 +7,7 @@ import TopSellers from "@/components/TopSellers";
 export default function Home() {
   return (
     <div>
-      <MainProduct mainProductIndex={4} />
+      <MainProduct />
       <NewArrivals />
       <TopSellers />
     </div>
